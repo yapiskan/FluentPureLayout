@@ -305,12 +305,3 @@ extension UIView {
         return self
     }
 }
-
-
-// MARK: XOR
-
-infix operator ^^ { associativity left precedence 120 }
-
-func ^^<T : BooleanType, U : BooleanType>(lhs: T, rhs: U) -> Bool {
-    return lhs.boolValue != rhs.boolValue
-}
