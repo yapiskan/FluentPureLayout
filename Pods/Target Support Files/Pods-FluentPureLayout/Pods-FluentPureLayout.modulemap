@@ -1,0 +1,6 @@
+framework module Pods_FluentPureLayout {
+  umbrella header "Pods-FluentPureLayout-umbrella.h"
+
+  export *
+  module * { export * }
+}

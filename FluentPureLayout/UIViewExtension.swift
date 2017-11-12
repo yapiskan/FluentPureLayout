@@ -1,9 +1,9 @@
 //
-//  AutoLayoutHelper.swift
-//  Helper
+//  UIViewExtension.swift
+//  FluentPureLayout
 //
-//  Created by Ali Ersöz on 6/6/16.
-//  Copyright © 2016 Ali Ersoz. All rights reserved.
+//  Created by Ali Ersöz on 11/12/17.
+//  Copyright © 2017 Ali Ersöz. All rights reserved.
 //
 
 import Foundation
@@ -103,109 +103,118 @@ extension UIView {
         }
     }
     
-    func left(inset: CGFloat) -> UIView {
-        if (self.leftConstraint == nil) {
-            self.leftConstraint = self.autoPinEdgeToSuperviewEdge(.Leading, withInset: inset)
+    @discardableResult
+    func left(_ inset: CGFloat) -> UIView {
+        if self.leftConstraint == nil {
+            self.leftConstraint = self.autoPinEdge(toSuperviewEdge: .leading, withInset: inset)
             self.leftConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
-    func right(inset: CGFloat) -> UIView {
-        if (self.rightConstraint == nil) {
-            self.rightConstraint = self.autoPinEdgeToSuperviewEdge(.Trailing, withInset: inset)
+    @discardableResult
+    func right(_ inset: CGFloat) -> UIView {
+        if self.rightConstraint == nil {
+            self.rightConstraint = self.autoPinEdge(toSuperviewEdge: .trailing, withInset: inset)
             self.rightConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
-    func top(inset: CGFloat) -> UIView {
-        if (self.topConstraint == nil) {
-            self.topConstraint = self.autoPinEdgeToSuperviewEdge(.Top, withInset: inset)
+    @discardableResult
+    func top(_ inset: CGFloat) -> UIView {
+        if self.topConstraint == nil {
+            self.topConstraint = self.autoPinEdge(toSuperviewEdge: .top, withInset: inset)
             self.topConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
-    func bottom(inset: CGFloat) -> UIView {
-        if (self.bottomConstraint == nil) {
-            self.bottomConstraint = self.autoPinEdgeToSuperviewEdge(.Bottom, withInset: inset)
+    @discardableResult
+    func bottom(_ inset: CGFloat) -> UIView {
+        if self.bottomConstraint == nil {
+            self.bottomConstraint = self.autoPinEdge(toSuperviewEdge: .bottom, withInset: inset)
             self.bottomConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
-    func width(width: CGFloat) -> UIView {
-        if (self.widthConstraint == nil) {
-            self.widthConstraint = self.autoSetDimension(.Width, toSize: width)
+    @discardableResult
+    func width(_ width: CGFloat) -> UIView {
+        if self.widthConstraint == nil {
+            self.widthConstraint = self.autoSetDimension(.width, toSize: width)
             self.widthConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
-    func size(size: CGSize) -> UIView {
-        self.width(size.width).height(size.height)
-        
-        return self
-    }
-
-    func height(height: CGFloat) -> UIView {
-        if (self.heightConstraint == nil) {
-            self.heightConstraint = self.autoSetDimension(.Height, toSize: height)
+    @discardableResult
+    func height(_ height: CGFloat) -> UIView {
+        if self.heightConstraint == nil {
+            self.heightConstraint = self.autoSetDimension(.height, toSize: height)
             self.heightConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
+    func size(_ size: CGSize) -> UIView {
+        return self.width(size.width).height(size.height)
+    }
+    
+    @discardableResult
     func centeredOnX(offset: CGFloat = 0) -> UIView {
-        if (self.centerXConstraint == nil) {
-            self.centerXConstraint = self.autoAlignAxis(.Vertical, toSameAxisOfView: self.superview!, withOffset: offset)
+        if self.centerXConstraint == nil {
+            self.centerXConstraint = self.autoAlignAxis(.vertical, toSameAxisOf: self.superview!, withOffset: offset)
             self.centerXConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func centeredOnY(offset: CGFloat = 0) -> UIView {
-        if (self.centerYConstraint == nil) {
-            self.centerYConstraint = self.autoAlignAxis(.Horizontal, toSameAxisOfView: self.superview!, withOffset: offset)
+        if self.centerYConstraint == nil {
+            self.centerYConstraint = self.autoAlignAxis(.horizontal, toSameAxisOf: self.superview!, withOffset: offset)
             self.centerYConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func sameX(view: UIView, offset: CGFloat = 0) -> UIView {
-        if (self.centerXConstraint == nil) {
-            self.centerXConstraint = self.autoAlignAxis(.Vertical, toSameAxisOfView: view, withOffset: offset)
+        if self.centerXConstraint == nil {
+            self.centerXConstraint = self.autoAlignAxis(.vertical, toSameAxisOf: view, withOffset: offset)
             self.centerXConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func sameY(view: UIView, offset: CGFloat = 0) -> UIView {
-        if (self.centerYConstraint == nil) {
-            self.centerYConstraint = self.autoAlignAxis(.Horizontal, toSameAxisOfView: view, withOffset: offset)
+        if self.centerYConstraint == nil {
+            self.centerYConstraint = self.autoAlignAxis(.horizontal, toSameAxisOf: view, withOffset: offset)
             self.centerYConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func spread() -> UIView {
-        self.spread(vertical: true).spread(horizontal: true)
-        
-        return self
+        return self.spread(vertical: true).spread(horizontal: true)
     }
     
-    func spread(vertical vertical: Bool) -> UIView {
+    @discardableResult
+    func spread(vertical: Bool) -> UIView {
         if vertical {
             self.top(0).bottom(0)
         }
@@ -213,7 +222,8 @@ extension UIView {
         return self
     }
     
-    func spread(horizontal horizontal: Bool) -> UIView {
+    @discardableResult
+    func spread(horizontal: Bool) -> UIView {
         if horizontal {
             self.left(0).right(0)
         }
@@ -221,96 +231,97 @@ extension UIView {
         return self
     }
     
+    @discardableResult
     func spreadHorizontally() -> UIView {
         self.spread(horizontal: true)
         
         return self
     }
     
+    @discardableResult
     func spreadVertically() -> UIView {
         self.spread(vertical: true)
         
         return self
     }
     
+    @discardableResult
     func pinTo(view: UIView, top: CGFloat) -> UIView {
         if self.topConstraint == nil {
-            self.topConstraint = self.autoPinEdge(.Top, toEdge: .Bottom, ofView: view, withOffset: top)
+            self.topConstraint = self.autoPinEdge(.top, to: .bottom, of: view, withOffset: top)
             self.topConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func pinTo(view: UIView ,left: CGFloat) -> UIView {
         if self.leftConstraint == nil {
-            self.leftConstraint = self.autoPinEdge(.Leading, toEdge: .Trailing, ofView: view, withOffset: left)
+            self.leftConstraint = self.autoPinEdge(.leading, to: .trailing, of: view, withOffset: left)
             self.leftConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func pinTo(view: UIView, bottom: CGFloat = 0) -> UIView {
         if self.bottomConstraint == nil {
-            self.bottomConstraint = self.autoPinEdge(.Bottom, toEdge: .Top, ofView: view, withOffset: bottom)
+            self.bottomConstraint = self.autoPinEdge(.bottom, to: .top, of: view, withOffset: bottom)
             self.bottomConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func pinTo(view: UIView, right: CGFloat = 0) -> UIView {
         if self.rightConstraint == nil {
-            self.rightConstraint = self.autoPinEdge(.Trailing, toEdge: .Leading, ofView: view, withOffset: right)
+            self.rightConstraint = self.autoPinEdge(.trailing, to: .leading, of: view, withOffset: right)
             self.rightConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func alignTo(view: UIView, top: CGFloat = 0) -> UIView {
         if self.topConstraint == nil {
-            self.topConstraint = self.autoPinEdge(.Top, toEdge: .Top, ofView: view, withOffset: top)
+            self.topConstraint = self.autoPinEdge(.top, to: .top, of: view, withOffset: top)
             self.topConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func alignTo(view: UIView, left: CGFloat = 0) -> UIView {
         if self.leftConstraint == nil {
-            self.leftConstraint = self.autoPinEdge(.Leading, toEdge: .Leading, ofView: view, withOffset: left)
+            self.leftConstraint = self.autoPinEdge(.leading, to: .leading, of: view, withOffset: left)
             self.leftConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func alignTo(view: UIView, bottom: CGFloat = 0) -> UIView {
         if self.bottomConstraint == nil {
-            self.bottomConstraint = self.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: view, withOffset: bottom)
+            self.bottomConstraint = self.autoPinEdge(.bottom, to: .bottom, of: view, withOffset: bottom)
             self.bottomConstraint?.identifier = self.variableName
         }
         
         return self
     }
     
+    @discardableResult
     func alignTo(view: UIView, right: CGFloat = 0) -> UIView {
         if self.rightConstraint == nil {
-            self.rightConstraint = self.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: view, withOffset: right)
+            self.rightConstraint = self.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: right)
             self.rightConstraint?.identifier = self.variableName
         }
         
         return self
     }
-}
-
-
-// MARK: XOR
-
-infix operator ^^ { associativity left precedence 120 }
-
-func ^^<T : BooleanType, U : BooleanType>(lhs: T, rhs: U) -> Bool {
-    return lhs.boolValue != rhs.boolValue
 }
