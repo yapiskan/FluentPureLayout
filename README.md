@@ -1,5 +1,5 @@
 
-# AutoLayoutHelper
+# FluentPureLayout
 
 This is a helper class for most commonly used autolayout constraints built on top of PureLayout. This helper also is being developed in a fluent way. So you can easily define all your constraints just in 1 line and in a readable format.
 
@@ -8,7 +8,7 @@ Ping me for any suggestions you have!
 # Methods
 
 ## Pin to superview
-Now, we have a view and we want to pin it to its superview. 
+Now, we have a view and we want to pin it to its superview.
 
 ```
 let containerView = UIView()
@@ -32,7 +32,7 @@ Vertically pin to superview
 containerView.spreadVertically()
 ```
 
-###All methods
+### All methods
 ```
 func spread() -> UIView
 func spreadHorizontally() -> UIView
@@ -60,7 +60,7 @@ topView.top(10).spreadHorizontally().height(60)
 bottomView.pinTo(topView, top: 10).left(10).right(10).height(80)
 ```
 
-###All methods
+### All methods
 ```
 func pinTo(view: UIView, top: CGFloat) -> UIView
 func pinTo(view: UIView, left: CGFloat) -> UIView
@@ -80,7 +80,7 @@ view1.top(10).left(10).width(100)
 view2.alignTo(view2, left:0).alignTo(view2, right: 0).pinTo(view1, top: 20)
 ```
 
-###All methods
+### All methods
 ```
 func alignTo(view: UIView, top: CGFloat) -> UIView
 func alignTo(view: UIView, left: CGFloat) -> UIView
@@ -107,7 +107,7 @@ view1.size(CGSizeMake(100, 100)).centeredOnX().top(100)
 view2.sameX(view1, offset:0).sameY(view1, offset: 150).size(CGSizeMake(60, 60))
 ```
 
-###All methods
+### All methods
 ```
 func centeredOnX(offset: CGFloat = 0) -> UIView
 func centeredOnY(offset: CGFloat = 0) -> UIView
@@ -117,7 +117,7 @@ func sameY(view: UIView, offset: CGFloat = 0) -> UIView
 
 # Where are these constraints?
 
-Good question! We have a good answer for that. 
+Good question! We have a good answer for that.
 
 When you create a constraint like below
 ```
@@ -130,11 +130,11 @@ You will have 4 constraint stored in your object as an associated property. So i
 view1.topConstraint.constant = 100
 self.view.setNeedsUpdateConstraints()
 UIView.animateWithDuration(0.25) { completed in
-	self.view.layoutIfNeeded()
+self.view.layoutIfNeeded()
 }
 ```
 
-###All Constraints
+### All Constraints
 ```
 var leftConstraint: NSLayoutConstraint?
 var rightConstraint: NSLayoutConstraint?
@@ -145,3 +145,4 @@ var widthConstraint: NSLayoutConstraint?
 var centerXConstraint: NSLayoutConstraint?
 var centerYConstraint: NSLayoutConstraint?
 ```
+
