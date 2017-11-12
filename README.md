@@ -1,7 +1,7 @@
 
 # FluentPureLayout
 
-This is a helper class for most commonly used autolayout constraints built on top of PureLayout. This helper also is being developed in a fluent way. So you can easily define all your constraints just in 1 line and in a readable format.
+This is a helper library for the most commonly used autolayout constraints which is built on top of PureLayout. This library was developed in a fluent way, so you can easily define all of your constraints just in a one line and in a more readable format.
 
 Ping me for any suggestions you have!
 
